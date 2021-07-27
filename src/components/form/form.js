@@ -23,7 +23,7 @@ export default class FormComponent extends Component {
       company: "",
       phone: "",
       email: "",
-      checkbox: "",
+      checkbox: false,
       isEmailValid: false,
       emailErr: false,
       canSubmit: true,
@@ -34,21 +34,17 @@ export default class FormComponent extends Component {
   }
 
   handleEmail=()=>{
-
     const emailRegex=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    const findChar = this.state.email.indexOf("@");
-    if(!match(this.state.email, emailRegex)){
-      this.state.isEmailValid = false;
-      this.state.emailErr = true
-    } else {
+    if(match(this.state.email, emailRegex)){
       this.state.isEmailValid = true;
       this.state.emailErr = false
-
+    } else {
+      this.state.isEmailValid = false;
+      this.state.emailErr = true
     }
   }
 
   handleInputs = (e) => {
-    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });  
     this.handleEmail()
     if (
@@ -56,7 +52,7 @@ export default class FormComponent extends Component {
       this.state.company &&
       this.state.phone &&
       this.state.email &&
-      e.target.checked &&
+      this.state.checkbox &&
       this.state.isEmailValid
     ) {
       this.state.canSubmit = false;
@@ -65,13 +61,17 @@ export default class FormComponent extends Component {
     }
   };
 
+  checkBoxCheck = (e) => {
+    this.setState({[e.target.name]: e.target.checked})
+  }
+
 
   submitForm=()=>{
     const data = {
-      name: String(this.state.fullName),
-      company_name: String(this.state.company),
-      email: String(this.state.email),
-      phone: String(this.state.phone),
+      name: this.state.fullName,
+      company_name: this.state.company,
+      email: this.state.email,
+      phone: this.state.phone
     };
 
     const headersToSend = {
@@ -184,9 +184,9 @@ export default class FormComponent extends Component {
               <div className="agreementDiv">
                 <div className="checkBoxWrapper">
                   <Checkbox
+                    onClick={this.checkBoxCheck}
                     name="checkbox"
-                    required={true}
-                    onChange={this.handleInputs}
+                    // onChange={this.handleInputs}
                   ></Checkbox>
                 </div>
                 <div className="agreementText">

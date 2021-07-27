@@ -29,7 +29,10 @@ div {
         .MuiFormControl-root {
           padding: 5px 0;
           margin: 0;
-          width: 100% !important
+          width: 100% !important;
+          div{
+            width: 100% !important;
+          }
         }
         .btnDiv {
           padding: 15px 0;
