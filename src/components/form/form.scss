@@ -1,34 +1,44 @@
 div {
-  width: 85% !important;
-  @media (max-width: 1280px){
+  width: 95% !important;
+  margin: 0 auto;
+  @media (max-width: 992px){
     width: 100% !important;
   }
   .formSection {
     padding: 30px;
     box-shadow: 0px 3px 16px #00000029;
+    @media (max-width:1280px){
+      margin: 15px 0;
+    }
     .top-info {
-      width: 100%;
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
+      width: 100% !important;
+      height: 100% !important;
+
     }
     .form-layout {
-      @media (max-width: 1280px){
-        width: 85% !important;
+      @media (max-width: 992px){
+        width: 100% !important;
       }
       form {
-        width: 100% !important;
+        min-height: 100% !important; 
         display: flex;
         flex-flow: column;
         align-items: center;
         .MuiFormControl-root {
-          width: 100% !important;
+          padding: 5px 0;
+          margin: 0;
+          width: 100% !important
         }
         .btnDiv {
+          padding: 15px 0;
           display: flex;
-          width: 100%;
+          align-items: center !important;
+          justify-content: center!important;
+          width: 100% !important;
           button {
+            width: 35%;
+            font-size: 12px;
+            word-wrap: break-word;
             background: #FFA52E;
             color: #fff;
             border-radius: 2em !important;
@@ -37,7 +47,16 @@ div {
               background: #5566;
               color: #ffd6a1
             }
+            @media (max-width:1280px){
+              width: 55% !important;
+            }
           }
+        }
+        .error {
+          padding: 10px 0 0 0;
+          max-width: 75%;
+          color: red;
+          font-size: small;
         }
       }
     }

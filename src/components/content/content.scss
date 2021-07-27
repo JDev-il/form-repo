@@ -1,18 +1,20 @@
 div {
-    margin: 0 auto;
+    width: 75%;
     .contentContainer {
-        max-width: 85%;
         display: flex;
         flex-flow: column;
-        align-items:center;
+        margin: 0;
         .contentHeader {
-            width: 100%;
-            display: flex;
-            flex-flow: column;
-            align-items:flex-start;
+            width: 85% !important;
+            display: flex !important;
+            flex-flow: column !important;
+            margin: 0 auto !important;
         }
-        .constentBody{
-
+        .contentBody{
+            display: flex !important;
+            flex-flow: column !important;       
+            width: 85% !important;
+            margin: 0 auto;
         }
     }    
 }

@@ -12,6 +12,7 @@ import FormControl from "@material-ui/core/FormControl";
 import { Button } from "@material-ui/core";
 import { Checkbox } from "@material-ui/core";
 import { match } from "check-types";
+import { indexOf } from "lodash";
 
 export default class FormComponent extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class FormComponent extends Component {
       email: "",
       checkbox: "",
       isEmailValid: false,
+      emailErr: false,
       canSubmit: true,
       releaseBtn: true,
 
@@ -32,11 +34,16 @@ export default class FormComponent extends Component {
   }
 
   handleEmail=()=>{
+
     const emailRegex=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if(match(this.state.email, emailRegex)){
-      this.state.isEmailValid = true;
-    } else {
+    const findChar = this.state.email.indexOf("@");
+    if(!match(this.state.email, emailRegex)){
       this.state.isEmailValid = false;
+      this.state.emailErr = true
+    } else {
+      this.state.isEmailValid = true;
+      this.state.emailErr = false
+
     }
   }
 
@@ -57,9 +64,6 @@ export default class FormComponent extends Component {
       this.state.canSubmit = true;
     }
   };
-
-
-
 
 
   submitForm=()=>{
@@ -154,6 +158,9 @@ export default class FormComponent extends Component {
                   id="emailInput"
                   name="email"
                 />
+              <span className="error" hidden={!this.state.emailErr}>
+              {!this.state.isEmailValid ? 'Please enter a valid email!' : ''}
+              </span>
               </FormControl>
 
               <div className="btnDiv">
